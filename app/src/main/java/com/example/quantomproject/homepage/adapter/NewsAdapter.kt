@@ -36,6 +36,7 @@ class NewsAdapter :
         fun bind(modelClass: Article) {
             binding.news = modelClass
 
+
             binding.ivNews.load(modelClass.urlToImage) {
                 crossfade(true)
                 placeholder(R.drawable.ic_baseline_image_24)
