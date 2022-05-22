@@ -34,4 +34,12 @@
     <string name="pass_no_spec_charecters">Special characters are not allowed</string>
     <string name="default_web_client_id_auth">568857694067-h0fjgtq1d57qiuf9m7q82l1fr7s274tm.apps.googleusercontent.com</string>
 
+
+
+    <string name="facebook_app_id">1704909773189280</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
+
+
 </resources>

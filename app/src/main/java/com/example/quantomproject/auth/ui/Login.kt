@@ -3,6 +3,7 @@ package com.example.quantomproject.auth.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,10 +18,16 @@ import com.example.quantomproject.R
 import com.example.quantomproject.auth.viewmodel.AuthViewModel
 import com.example.quantomproject.databinding.FragmentMainLoginBinding
 import com.example.quantomproject.utils.HandelEvents
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,6 +42,8 @@ class Login : Fragment(R.layout.fragment_main_login) {
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var googleSignInClient: GoogleSignInClient
     private val rCSignIn = 89
+    private val callbackManager = CallbackManager.Factory.create()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +52,31 @@ class Login : Fragment(R.layout.fragment_main_login) {
         googleSignIn()
         onClicksFuntions()
         observer()
+        facebookLogin()
+    }
+
+    private fun facebookLogin() {
+        LoginManager.getInstance()
+            .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+
+                    Log.d("Login", "facebook:onSuccess:$loginResult")
+
+                    val credential =
+                        FacebookAuthProvider.getCredential(loginResult.accessToken.token)
+                    authViewModel.googleSignIn(credential)
+                    Log.d("Login", "facebook:onSuccess:${loginResult.accessToken.token}")
+
+                }
+
+                override fun onCancel() {
+                    Log.d("Login", "facebook:onCancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d("Login", "facebook:onError", error)
+                }
+            })
     }
 
     private fun googleSignIn() {
@@ -55,6 +89,7 @@ class Login : Fragment(R.layout.fragment_main_login) {
     }
 
     private fun onClicksFuntions() {
+
         binding.loginButton.setOnClickListener {
             authViewModel.logIn(
                 binding.etEmail,
@@ -65,6 +100,11 @@ class Login : Fragment(R.layout.fragment_main_login) {
         binding.ivGoogle.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, rCSignIn)
+        }
+
+        binding.ivFacebook.setOnClickListener {
+            LoginManager.getInstance()
+                .logInWithReadPermissions(this, listOf("email", "public_profile"))
         }
 
         binding.signUp.setOnClickListener {
@@ -120,12 +160,14 @@ class Login : Fragment(R.layout.fragment_main_login) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode == rCSignIn) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
                 authViewModel.googleSignIn(credential)
+                Log.d("Login", "Google:onSuccess:${account.idToken!!}")
             } catch (e: ApiException) {
                 e.localizedMessage
             }

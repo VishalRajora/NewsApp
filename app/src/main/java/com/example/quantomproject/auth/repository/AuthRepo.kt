@@ -1,5 +1,6 @@
 package com.example.quantomproject.auth.repository
 
+import android.util.Log
 import com.example.quantomproject.utils.HandelEvents
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
@@ -70,13 +71,14 @@ class AuthRepo @Inject constructor(private var auth: FirebaseAuth) {
 
             }.addOnFailureListener {
                 CoroutineScope(Dispatchers.IO).launch {
-                    _signUpStatus.send(HandelEvents.ShowErrorMessages("Failed"))
+                    _signUpStatus.send(HandelEvents.ShowErrorMessages(it.localizedMessage))
                 }
 
             }
 
         } catch (e: Exception) {
             _signUpStatus.send(HandelEvents.ShowErrorMessages("Failed"))
+            Log.i("RepoAuth", "googleSignIn: catch${e.localizedMessage} ")
         }
 
     }
