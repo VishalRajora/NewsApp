@@ -71,6 +71,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                                 is HandelEvents.ShowSuccessMessages -> {
                                     activity.hideProgressBar()
                                     snackbar(it.messages)
+                                    navController.navigate(R.id.action_loginFragment_to_homepageFragment)
                                 }
                             }
                         }

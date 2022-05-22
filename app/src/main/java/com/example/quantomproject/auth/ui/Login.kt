@@ -103,7 +103,8 @@ class Login : Fragment(R.layout.fragment_main_login) {
         }
 
         binding.signUp.setOnClickListener {
-            parentLogin.getNextTab()
+            authViewModel.changeTab()
+            Log.i("Login", "onClicksFuntions: ")
         }
     }
 

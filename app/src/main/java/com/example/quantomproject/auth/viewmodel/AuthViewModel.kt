@@ -1,7 +1,10 @@
 package com.example.quantomproject.auth.viewmodel
 
+import android.util.Log
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quantomproject.auth.repository.AuthRepo
@@ -20,6 +23,9 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepo) : ViewModel(
 
     private val _viewStatus = Channel<HandelEvents>()
     val viewStatus = _viewStatus.receiveAsFlow()
+
+    private val _changeTab = MutableLiveData<Int>()
+    val changeTab: LiveData<Int> = _changeTab
 
     fun signUp(
         etEmail: EditText,
@@ -51,10 +57,10 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepo) : ViewModel(
                 etNumber.error = "Number can't be empty"
                 _viewStatus.send(HandelEvents.ShowErrorMessages("Number can't be empty"))
             }
-            !MyValidation.validateMobile(mobile = userNumber) -> {
-                etNumber.error = "Number is not valid"
-                _viewStatus.send(HandelEvents.ShowErrorMessages("Number is not valid"))
-            }
+//            !MyValidation.validateMobile(mobile = userNumber) -> {
+//                etNumber.error = "Number is not valid"
+//                _viewStatus.send(HandelEvents.ShowErrorMessages("Number is not valid"))
+//            }
             userPassword.isEmpty() -> {
                 etPassword.error = "Password can't be empty"
                 _viewStatus.send(HandelEvents.ShowErrorMessages("Password can't be empty"))
@@ -98,6 +104,12 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepo) : ViewModel(
     fun googleSignIn(credential: AuthCredential) = viewModelScope.launch {
         Dispatchers.IO
         repo.googleSignIn(credential)
+    }
+
+    fun changeTab() = viewModelScope.launch {
+        Dispatchers.IO
+        _changeTab.value = 1
+        Log.i("AuthView", "changeTab:${_changeTab.value} ")
     }
 
     val signUpStatus = repo.signUpStatus
