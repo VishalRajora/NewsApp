@@ -59,14 +59,9 @@ class Login : Fragment(R.layout.fragment_main_login) {
         LoginManager.getInstance()
             .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-
-                    Log.d("Login", "facebook:onSuccess:$loginResult")
-
                     val credential =
                         FacebookAuthProvider.getCredential(loginResult.accessToken.token)
                     authViewModel.googleSignIn(credential)
-                    Log.d("Login", "facebook:onSuccess:${loginResult.accessToken.token}")
-
                 }
 
                 override fun onCancel() {

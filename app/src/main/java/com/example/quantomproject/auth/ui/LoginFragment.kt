@@ -35,12 +35,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), ChangeTab {
             tab.text = adapter.mFragmentTitleList[position]
         }.attach()
 
-
-        for (i in 0 until binding.tabLayout.tabCount) {
-            val tv = LayoutInflater.from(activity)
-                .inflate(R.layout.custom_tab, null) as TextView
-            binding.tabLayout.getTabAt(i)!!.customView = tv
-        }
     }
 
     private fun setupViewPager(viewPager: ViewPager2) {

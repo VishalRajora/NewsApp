@@ -11,6 +11,7 @@ import com.example.quantomproject.R
 import com.example.quantomproject.databinding.NewsSingleRowBinding
 import com.example.quantomproject.homepage.data.Article
 import com.github.marlonlom.utilities.timeago.TimeAgo
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,18 +38,20 @@ class NewsAdapter :
             binding.news = modelClass
 
 
+            //image setup
             binding.ivNews.load(modelClass.urlToImage) {
                 crossfade(true)
                 placeholder(R.drawable.ic_baseline_image_24)
                 transformations(RoundedCornersTransformation(10f))
             }
 
-            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            sdf.timeZone = TimeZone.getTimeZone("GMT")
-
+            //date setup
+            val date: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+            date.timeZone = TimeZone.getTimeZone("GMT")
+            val result: Long
             try {
-                val time: Long = sdf.parse(modelClass.publishedAt).time
-                val ago = TimeAgo.using(time)
+                result = date.parse(modelClass.publishedAt).time; //2019-02-25T22:43:23.213
+                val ago = TimeAgo.using(result)
                 binding.tvDateTime.text = ago
             } catch (e: Exception) {
                 e.printStackTrace()

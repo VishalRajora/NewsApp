@@ -24,18 +24,34 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@drawable/tab_background"-->
+    <!--        app:tabGravity="fill"-->
+    <!--        app:tabIndicatorHeight="0dp"-->
+    <!--        app:tabIndicatorGravity="stretch"-->
+    <!--        app:tabIndicator="@drawable/tab_selector"-->
+    <!--        app:tabMode="fixed"-->
+    <!--        app:tabPadding="0dp"-->
+    <!--        app:tabSelectedTextColor="@color/white"-->
+    <!--        app:tabTextColor="@color/black"-->
+    <!--        />-->
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@drawable/tab_background"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         app:tabGravity="fill"
-        app:tabIndicatorHeight="0dp"
+        app:tabIndicator="@drawable/selected_tab"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorGravity="stretch"
         app:tabMode="fixed"
-        app:tabPadding="0dp"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@style/TabLayout"
-        app:tabTextColor="@color/black" />
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/white" />
 
 
     <androidx.viewpager2.widget.ViewPager2
