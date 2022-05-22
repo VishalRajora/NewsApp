@@ -43,7 +43,6 @@ class NewsAdapter :
                 transformations(RoundedCornersTransformation(10f))
             }
 
-
             val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             sdf.timeZone = TimeZone.getTimeZone("GMT")
 
