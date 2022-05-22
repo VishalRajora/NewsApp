@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loginHint">johndoe@gmail.com</string>
+    <string name="registerNow">Register Now</string>
+</resources>

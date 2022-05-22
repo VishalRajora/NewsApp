@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">QuantomProject</string>
+    <string name="authName">SocialX</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signIn_text">SignIn into your \n Account</string>
+    <string name="loginHint">Email</string>
+    <string name="hint">Johndoe@gmail.com</string>
+    <string name="password">Password</string>
+    <string name="forgetPassword">Forget Password?</string>
+    <string name="loginWith">Login With</string>
+    <string name="dontAcc">Don\'t have an Account?</string>
+    <string name="registerNow">Register Now</string>
+    <string name="loginButton">LOGIN</string>
+    <string name="name">Name</string>
+    <string name="namehint">John Doe</string>
+    <string name="password_hint">*******</string>
+    <string name="agree">I agree with</string>
+    <string name="terms_condition"><u>term &amp; condition</u></string>
+    <string name="alredy_acc">Already have an Account ?</string>
+    <string name="signIn">Sign In!</string>
+    <string name="signUp_text">Create an \n Account</string>
+    <string name="contact">Contact no</string>
+    <string name="IN">IN</string>
+    <string name="con">+91</string>
+    <string name="phoneHint">9848445562</string>
+    <string name="registerButton">REGISTER</string>
+
+    <string name="on_num">One Number Needed at Least</string>
+    <string name="min_password">Password should include 1Capital letter, 1 Number, and min 8 character, special character are not allowed</string>
+    <string name="password_empty">Please , enter your password</string>
+    <string name="cap_letter">1 Capital letter Needed At Least</string>
+    <string name="pass_charecters">Password must > 8 characters</string>
+    <string name="pass_no_spec_charecters">Special characters are not allowed</string>
+    <string name="default_web_client_id_auth">568857694067-h0fjgtq1d57qiuf9m7q82l1fr7s274tm.apps.googleusercontent.com</string>
+
+</resources>
